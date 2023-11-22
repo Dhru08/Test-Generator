@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { saveAs } from 'file-saver';
 import copyicon from '../assets/copy.svg';
 import downloadicon from '../assets/download.svg';
-
-// TODO:
-// Generate Output
-// Copy and Download Icon
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Number = () => {
     const [type, setType] = useState('integer');
@@ -37,14 +37,38 @@ const Number = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const generatedOutput = `Testcase: ${testcase}, Type: ${type}, Min Value: ${minval}, Max Value: ${maxval}`;
-        setOutput(generatedOutput);
+        if (testcase < 0 || parseInt(minval) > parseInt(maxval)) {
+            toast.error('Invalid input values. Please check your input.');
+            return;
+        }
+        if (testcase > 100000) {
+            toast.info(`Testcase should be below 100000!`);
+            return;
+        }
+
+        const generatedOutput = [testcase];
+
+        for (let index = 0; index < testcase; index++) {
+            const randomNumber = type === 'integer' ? Math.floor(Math.random() * (parseInt(maxval) - parseInt(minval) + 1)) + parseInt(minval) : Math.random() * (parseFloat(maxval) - parseFloat(minval)) + parseFloat(minval);
+            generatedOutput.push(randomNumber);
+        }
+
+        setOutput(generatedOutput.join('\n'));
     };
 
     const handleReset = (event) => {
         event.preventDefault();
         const generatedOutput = '';
         setOutput(generatedOutput);
+    };
+
+    const handleCopyClick = () => {
+        toast.success('Content copied to clipboard!');
+    };
+
+    const handleDownloadClick = () => {
+        const blob = new Blob([output], { type: 'text/plain;charset=utf-8' });
+        saveAs(blob, 'output.txt');
     };
 
     return (
@@ -99,11 +123,14 @@ const Number = () => {
                     <div className='d-flex justify-content-between mb-2'>
                         <div className='fw-semibold'>Output</div>
                         <div>
-                            <img src={copyicon} className='mx-1' style={{ height: '20px' }} alt='Copy' />
-                            <img src={downloadicon} className='mx-2' style={{ height: '20px' }} alt='Download' />
+                            <CopyToClipboard text={output} onCopy={handleCopyClick}>
+                                <img src={copyicon} className='mx-1' style={{ height: '20px', cursor: 'pointer' }} alt='Copy' />
+                            </CopyToClipboard>
+                            <img src={downloadicon} className='mx-2' style={{ height: '20px', cursor: 'pointer' }} alt='Download' onClick={handleDownloadClick} />
                         </div>
                     </div>
                     <textarea className='form-control' style={{ height: '360px' }} id='exampleFormControlTextarea1' value={output} readOnly />
+                    <ToastContainer autoClose={2000} hideProgressBar={true} closeOnClick />
                 </div>
             </div>
         </>
