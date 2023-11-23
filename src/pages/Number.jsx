@@ -56,7 +56,7 @@ const Number = () => {
         setOutput(generatedOutput.join('\n'));
     };
 
-    const handleReset = (event) => {
+    const handleClear = (event) => {
         event.preventDefault();
         const generatedOutput = '';
         setOutput(generatedOutput);
@@ -80,7 +80,7 @@ const Number = () => {
                             <label htmlFor='testcase' className='form-label fw-semibold'>
                                 Testcase
                             </label>
-                            <input type='number' className='form-control' id='testcase' name='testcase' value={testcase} onChange={handleInputChange} aria-describedby='emailHelp' placeholder='1' />
+                            <input type='number' className='form-control' id='testcase' name='testcase' value={testcase} onChange={handleInputChange} />
                         </div>
                         <div className='mb-3'>
                             <label htmlFor='type' className='form-label fw-semibold'>
@@ -103,19 +103,19 @@ const Number = () => {
                             <label htmlFor='minval' className='form-label fw-semibold'>
                                 Min Value
                             </label>
-                            <input type='number' className='form-control' id='minval' name='minval' value={minval} onChange={handleInputChange} aria-describedby='emailHelp' placeholder='Enter the minimum value for generation' />
+                            <input type='number' className='form-control' id='minval' name='minval' value={minval} onChange={handleInputChange} />
                         </div>
                         <div className='mb-3'>
                             <label htmlFor='maxval' className='form-label fw-semibold'>
                                 Max Value
                             </label>
-                            <input type='number' className='form-control' id='maxval' name='maxval' value={maxval} onChange={handleInputChange} aria-describedby='emailHelp' placeholder='Enter the maximum value for generation' />
+                            <input type='number' className='form-control' id='maxval' name='maxval' value={maxval} onChange={handleInputChange} />
                         </div>
                         <button type='submit' className='btn btn-primary mx-2'>
-                            Submit
+                            Generate
                         </button>
-                        <button type='reset' className='btn btn-danger mx-2' onClick={handleReset}>
-                            Reset
+                        <button type='clear' className='btn btn-danger mx-2' onClick={handleClear}>
+                            Clear
                         </button>
                     </form>
                 </div>
