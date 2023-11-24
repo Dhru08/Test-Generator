@@ -14,11 +14,6 @@ const String = () => {
     const [includeUpper, setIncludeUpper] = useState(false);
     const [includeNumber, setIncludeNumber] = useState(false);
 
-    const handleTypeChange = (event) => {
-        const selectedType = event.target.value;
-        setType(selectedType);
-    };
-
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         switch (name) {
@@ -54,7 +49,7 @@ const String = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (testcase < 0 || size < 0) {
+        if (testcase < 0 || size < 0 || (!includeLower && !includeUpper && !includeNumber)) {
             toast.error('Invalid input values. Please check your input.');
             return;
         }
@@ -140,19 +135,19 @@ const String = () => {
                                 Include
                             </label>
                             <div class='form-check'>
-                                <input class='form-check-input' type='checkbox' value='' id='lower' name='includeLower' checked={includeLower} onChange={handleCheckboxChange} />
+                                <input class='form-check-input' type='checkbox' id='lower' name='includeLower' checked={includeLower} onChange={handleCheckboxChange} />
                                 <label class='form-check-label' htmlFor='type'>
                                     a-z
                                 </label>
                             </div>
                             <div class='form-check'>
-                                <input class='form-check-input' type='checkbox' value='' id='upper' name='includeUpper' checked={includeUpper} onChange={handleCheckboxChange} />
+                                <input class='form-check-input' type='checkbox' id='upper' name='includeUpper' checked={includeUpper} onChange={handleCheckboxChange} />
                                 <label class='form-check-label' htmlFor='type'>
                                     A-Z
                                 </label>
                             </div>
                             <div class='form-check'>
-                                <input class='form-check-input' type='checkbox' value='' id='number' name='includeNumber' checked={includeNumber} onChange={handleCheckboxChange} />
+                                <input class='form-check-input' type='checkbox' id='number' name='includeNumber' checked={includeNumber} onChange={handleCheckboxChange} />
                                 <label class='form-check-label' htmlFor='type'>
                                     0-9
                                 </label>
