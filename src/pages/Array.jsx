@@ -56,12 +56,8 @@ const Array = () => {
         generatedOutput.push(testcase);
 
         for (let testCaseIndex = 0; testCaseIndex < testcase; testCaseIndex++) {
-            // Add the current testcase number
-
-            // Add the size value
             generatedOutput.push(size);
 
-            // Add array values
             const arrayValues = [];
             for (let arrayIndex = 0; arrayIndex < size; arrayIndex++) {
                 const randomNumber = type === 'integer' ? Math.floor(Math.random() * (parseInt(maxval) - parseInt(minval) + 1)) + parseInt(minval) : Math.random() * (parseFloat(maxval) - parseFloat(minval)) + parseFloat(minval);
@@ -70,7 +66,6 @@ const Array = () => {
             generatedOutput.push(arrayValues.join(' '));
         }
 
-        // Set the output
         setOutput(generatedOutput.join('\n'));
     };
 
