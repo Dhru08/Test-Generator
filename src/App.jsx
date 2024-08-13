@@ -10,7 +10,7 @@ import Number from './pages/Number';
 import Array from './pages/Array';
 import String from './pages/String';
 import Tree from './pages/Tree';
-import Graph from './pages/Graph';
+import GraphComponent from './pages/Graph';
 
 const App = () => {
     return (
@@ -24,7 +24,7 @@ const App = () => {
                         <Route exact path='/array' element={<Array />} />
                         <Route exact path='/string' element={<String />} />
                         <Route exact path='/tree' element={<Tree />} />
-                        <Route exact path='/graph' element={<Graph />} />
+                        <Route exact path='/graph' element={<GraphComponent />} />
                     </Routes>
                 </div>
             </BrowserRouter>
